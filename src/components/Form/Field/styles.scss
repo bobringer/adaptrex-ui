@@ -1,0 +1,25 @@
+.adx-field {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px 0;
+
+	.adx-label {
+		width: 150px;
+		font-size: $base-font-size;
+	}
+	.adx-control {
+		flex: 1;
+	}
+
+	.adx-input {
+		outline: 0;
+		border: 1px solid #ccc;
+		font-size: 0.875rem;
+		padding: 4px;
+		&:focus {
+			outline: 0;
+			border: 1px solid #039;
+		}
+	}
+}

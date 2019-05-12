@@ -1,0 +1,38 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+}
+
+.root {
+	padding: 0;
+	margin: 0;
+	font-family: ".SF NS Text", Helvetica, sans-serif;
+}
+
+td, th {
+	padding: 4px 8px;
+	text-align: right;
+}
+
+td {
+	border-bottom: 1px solid #e4e4e4;
+}
+
+table {
+	border-spacing: 0;
+	border-collapse: separate;
+}
+
+button {
+	border: 0;
+	background: #ccffcc;
+	font-size: 2rem;
+}
