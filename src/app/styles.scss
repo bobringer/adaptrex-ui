@@ -1,7 +1,7 @@
 .top {
 	display: flex;
-	justify-content: center;
-	padding: 16px 0;
+	justify-content: space-around;
+	padding: 16px;
 }
 
 .header {
@@ -14,4 +14,34 @@
 
 .body {
 	padding: 0 16px 16px 16px;
+}
+
+.dirty-status {
+	h3 {
+		margin: 0 0 4px 4px;
+	}
+
+	.dirty {
+		color: darkorange;
+	}
+
+	.not-dirty {
+		color: lightgreen;
+	}
+
+	width: 400px;
+	background-color: #f4f4f4;
+	border: 1px solid #ccc;
+	padding: 8px;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	pre {
+		flex: 1;
+		background-color: white;
+		border: 1px solid #ccc;
+		margin: 0;
+		padding: 8px;
+		height: 100%;
+	}
 }

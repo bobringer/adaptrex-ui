@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DetailsForm from './components/Loan/DetailsForm';
 import Schedule from './components/Loan/Schedule';
 import './sass/base.scss';
 import './styles.scss';
+import useForm from '../components/Form/hooks/useForm';
 
 const App = () => {
-	const [ loanInfo, setLoanInfo ] = useState();
+	const detailsForm = useForm();
+
+	const { changes, dirty, values } = detailsForm;
+
+	const dirtyClass = dirty ? 'dirty' : 'not-dirty';
 
 	return (
 		<>
@@ -13,11 +18,18 @@ const App = () => {
 				Adaptrex Loan Calculator
 			</div>
 			<div className='top'>
-				<DetailsForm formData={loanInfo} setFormData={setLoanInfo} />
+				<DetailsForm form={detailsForm} />
+				<div className='dirty-status'>
+					<h3>
+						Form is <span className={dirtyClass}>{dirty ? 'DIRTY' : 'NOT DIRTY'}</span>
+					</h3>
+					<pre>
+						{JSON.stringify(changes, null, 2)};
+					</pre>
+				</div>
 			</div>
 			<div className='body'>
-				{JSON.stringify(loanInfo, null, 2)}
-				<Schedule loanInfo={loanInfo} />
+				<Schedule loanInfo={values} />
 			</div>
 		</>
 	);

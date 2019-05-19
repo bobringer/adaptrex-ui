@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 
-const useSetInitialFormData = ({
+const useSetInitialFormValues = ({
 	children,
-	setFormData,
+	form,
 }) => {
 	useEffect(() => {
 		const defaultValues = React.Children
@@ -12,8 +12,9 @@ const useSetInitialFormData = ({
 				[props.name]: props.value
 			}), {});
 
-		setFormData(defaultValues);
+		form.setValues(defaultValues);
+		form.setInitialValues(defaultValues);
 	}, []);
 };
 
-export default useSetInitialFormData;
+export default useSetInitialFormValues;

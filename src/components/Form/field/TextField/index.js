@@ -24,9 +24,6 @@ const TextField = ({
 	onChangeBuffer,
 	type,
 	label,
-	// maxLength,
-	// minLength,
-	// pattern,	// We might not want to pass this through as we apply our own validators
 	placeholder,
 	readOnly,
 	spellcheck,
@@ -34,7 +31,7 @@ const TextField = ({
 	onChange,
 	onDirtyChange,
 	onValidChange,
-	value: initialValue,
+	value: initialValue = '',
 	validator,
 	required,
 }) => {

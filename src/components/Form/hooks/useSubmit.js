@@ -1,15 +1,15 @@
 import { useCallback } from 'react';
 
 const useSubmit = ({
-	formData,
+	form: { values },
 	onSubmit,
 }) => (
 	useCallback((event) => {
 		if (event)
 			event.preventDefault();
 
-		onSubmit && onSubmit(formData);
-	}, [formData])
+		onSubmit && onSubmit(values);
+	}, [values])
 );
 
 export default useSubmit;

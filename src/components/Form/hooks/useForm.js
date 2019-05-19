@@ -1,49 +1,26 @@
-import useFormChildren from './useFormChildren';
-import useSetInitialFormData from './useSetInitialFormData';
-import useSubmit from './useSubmit';
+import { useState } from 'react';
 
-/**
- * @param children
- * @param fieldDefaults
- * @param setFormData
- * @param onFormChange
- * @param onSubmit
- * @param formData
- * @returns {{handleSubmit: *, formChildren: *}}
- */
-const useForm = ({
-	children,
-	fieldDefaults,
-	setFormData,
-	onChange: onFormChange,
-	onDirtyChange,
-	onValidChange,
-	onSubmit,
-	formData,
-}) => {
-	useSetInitialFormData({
-		children,
-		setFormData
-	});
-
-	const handleSubmit = useSubmit({
-		formData,
-		onSubmit,
-	});
-
-	const formChildren = useFormChildren({
-		children,
-		fieldDefaults,
-		formData,
-		setFormData,
-		onDirtyChange,
-		onFormChange,
-		onValidChange,
-	});
+const useForm = () => {
+	const [initialValues, setInitialValues] = useState({});
+	const [values, setValues] = useState({});
+	const [dirty, setDirty] = useState(false);
+	const [changes, setChanges] = useState({});
+	const [invalid, setInvalid] = useState(false);
+	const [invalidValues, setInvalidValues] = useState({});
 
 	return {
-		formChildren,
-		handleSubmit
+		values,
+		dirty,
+		changes,
+		initialValues,
+		invalid,
+		invalidValues,
+		setValues,
+		setDirty,
+		setChanges,
+		setInitialValues,
+		setInvalid,
+		setInvalidValues
 	};
 };
 

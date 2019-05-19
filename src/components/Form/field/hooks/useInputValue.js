@@ -7,34 +7,49 @@ const useBufferedOnInputChange = ({
 	value,
 }) => {
 	const [bufferedHandler, setBufferedHandler] = useState(null);
+	const [isValueAndBufferedValueInSync, setIsValueAndBufferedValueInSync] = useState(true);
 
 	const onInputChange = useCallback(({ target }) => {
 		const { value } = target;
 		setValue(value);
+		setIsValueAndBufferedValueInSync(false);
 
 		clearTimeout(bufferedHandler);
 
 		setBufferedHandler(setTimeout(() => {
 			onChange(value);
+			setIsValueAndBufferedValueInSync(true);
 			clearTimeout(bufferedHandler);
 		}, onChangeBuffer));
 	}, [
+		isValueAndBufferedValueInSync,
 		value,
 		onChange
 	]);
 
 	useEffect(() => () => clearTimeout(bufferedHandler), [bufferedHandler]);
 
-	return onInputChange;
+	return {
+		bufferedHandler,
+		onInputChange,
+		isValueAndBufferedValueInSync,
+	};
 };
 
 const useOnBlur = ({
+	bufferedHandler,
+	isValueAndBufferedValueInSync,
 	onChange,
 	value,
 }) => (
 	useCallback(() => {
-		onChange(value);
+		if (!isValueAndBufferedValueInSync) {
+			clearTimeout(bufferedHandler);
+			onChange(value);
+		}
 	}, [
+		bufferedHandler,
+		isValueAndBufferedValueInSync,
 		value,
 		onChange
 	])
@@ -55,7 +70,11 @@ const useInputValue = ({
 }) => {
 	const [value, setValue] = useState(initialValue);
 
-	const onInputChange = useBufferedOnInputChange({
+	const {
+		bufferedHandler,
+		onInputChange,
+		isValueAndBufferedValueInSync,
+	} = useBufferedOnInputChange({
 		onChange,
 		onChangeBuffer,
 		setValue,
@@ -63,14 +82,16 @@ const useInputValue = ({
 	});
 
 	const onBlur = useOnBlur({
+		bufferedHandler,
 		onChange,
 		value,
+		isValueAndBufferedValueInSync,
 	});
 
 	return {
 		value,
 		onBlur,
-		onInputChange
+		onInputChange,
 	};
 };
 

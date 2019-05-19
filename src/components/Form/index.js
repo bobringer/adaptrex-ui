@@ -1,48 +1,52 @@
 import React from 'react';
-import useForm from './hooks/useForm';
+import useSubmit from './hooks/useSubmit';
+import useSetInitialFormValues from './hooks/useSetInitialFormValues';
+import useFormChildren from './hooks/useFormChildren';
 
 /**
  *
- * @param ref
+ * @param form
  * @param className
  * @param children
  * @param fieldDefaults
- * @param setFormData
- * @param formData
  * @param onChange
+ * @param onDirtyChange
+ * @param onValidChange
  * @param onSubmit
  * @returns {*}
  * @constructor
  */
 const Form = ({
-	ref,
+	form,
 	className,
 	children,
 	fieldDefaults,
-	setFormData,
-	formData,
 	onChange,
 	onDirtyChange,
 	onValidChange,
 	onSubmit,
 }) => {
-	const {
-		formChildren,
-		handleSubmit
-	} = useForm({
+	useSetInitialFormValues({
+		children,
+		form,
+	});
+
+	const handleSubmit = useSubmit({
+		form,
+		onSubmit
+	});
+
+	const formChildren = useFormChildren({
 		children,
 		fieldDefaults,
-		setFormData,
+		form,
 		onChange,
 		onDirtyChange,
 		onValidChange,
-		onSubmit,
-		formData,
 	});
 
 	return (
 		<form
-			ref={ref}
 			className={className}
 			onSubmit={handleSubmit}
 		>
