@@ -21,14 +21,14 @@ const DetailsFormView = ({ form }) => (
 			// onChange={(value) => console.log(value)}
 		/>
 		<TextField
-			value="388000"
+			value="500000"
 			label="Loan Amount"
 			name="loanAmount"
 			validator={(value) => value > 100}
 			// onDirtyChange={(dirty) => alert(dirty)}
 		/>
 		<TextField
-			value="4.875"
+			value="5"
 			label="Rate"
 			name="interestRate"
 		/>
