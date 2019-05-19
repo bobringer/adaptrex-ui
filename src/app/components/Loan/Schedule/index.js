@@ -16,19 +16,17 @@ const getRow = ({
 	let principalPayment = roundHundredth(monthlyPayment - interestPayment);
 	let extraPayment = 0;
 	let closingBalance = roundHundredth(balance - principalPayment - extraPayment);
+	// console.log(loanLengthMonths == month, closingBalance > 0, (loanLengthMonths == month) && (closingBalance > 0));
 	if (loanLengthMonths === month && closingBalance > 0) {
 		extraPayment = roundHundredth(extraPayment + closingBalance);
 		closingBalance = 0;
 	}
 	if (closingBalance < 0) {
-		principalPayment = roundHundredth(principalPayment - closingBalance);
+		principalPayment = balance;
 		closingBalance = 0;
 	}
 
 	const totalPayment = roundHundredth(interestPayment + principalPayment + extraPayment);
-
-
-
 
 	return {
 		openingBalance: balance,
@@ -51,7 +49,7 @@ const getRows = ({
 	const rows = [];
 	let month = 0;
 
-	while (balance > 0) {
+	while (balance > 0 && month <= loanLengthMonths) {
 		month += 1;
 		const row = getRow({
 			month,
@@ -75,11 +73,13 @@ const Schedule = ({
 		interestRate,
 		loanLengthMonths,
 	} = loanInfo;
-	const monthlyPayment = roundHundredth(pmt(interestRate / 1200, loanLengthMonths, -loanAmount));
+	const loanLengthMonthsInt = parseInt(loanLengthMonths, 10);
+
+	const monthlyPayment = roundHundredth(pmt(interestRate / 1200, loanLengthMonthsInt, -loanAmount));
 
 	const rows = getRows({
 		loanAmount: parseInt(loanAmount, 10),
-		loanLengthMonths,
+		loanLengthMonths: loanLengthMonthsInt,
 		interestRate,
 		monthlyPayment
 	});

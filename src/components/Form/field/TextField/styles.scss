@@ -1,0 +1,19 @@
+.adx-form-field-input {
+	outline: 0;
+	border: 1px solid #ccc;
+	font-size: 2rem;
+	width: 100%;
+	padding: 4px;
+	&:focus {
+		outline: 0;
+		border: 1px solid #039;
+	}
+
+	&.adx-dirty {
+		border: 1px solid yellow;
+	}
+
+	&.adx-invalid {
+		border: 1px solid red;
+	}
+}

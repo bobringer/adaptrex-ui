@@ -1,0 +1,10 @@
+.adx-form-field {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px 0;
+
+	.adx-form-field-control {
+		flex: 1;
+	}
+}

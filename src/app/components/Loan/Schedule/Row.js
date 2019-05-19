@@ -13,7 +13,9 @@ const Row = ({
 	closingBalance,
 	totalPayment
 }) => (
-	<tr>
+	<tr
+		key={month}
+	>
 		<td>{month}</td>
 		<td>{to$(openingBalance)}</td>
 		<td>{to$(interestPayment)}</td>

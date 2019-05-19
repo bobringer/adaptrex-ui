@@ -16,6 +16,7 @@ const App = () => {
 				<DetailsForm formData={loanInfo} setFormData={setLoanInfo} />
 			</div>
 			<div className='body'>
+				{JSON.stringify(loanInfo, null, 2)}
 				<Schedule loanInfo={loanInfo} />
 			</div>
 		</>
